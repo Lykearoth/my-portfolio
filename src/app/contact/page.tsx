@@ -1,55 +1,40 @@
 "use client";
 
-import { useForm, ValidationError } from '@formspree/react';
+import { useForm } from '@formspree/react';
 
 export default function Contact() {
-  const [state, handleSubmit] = useForm("xykyzzdo");  // Replace with your real ID later
+  const [state, handleSubmit] = useForm("your-formspree-id");
 
   if (state.succeeded) {
-    return (
-      <main className="p-8 max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Contact Me</h1>
-        <p className="text-xl text-center text-green-600">Thanks for reaching out! I'll get back to you soon.</p>
-      </main>
-    );
+    return <p className="text-center text-2xl">Thanks! I'll get back to you soon.</p>;
   }
 
   return (
-    <main className="p-8 max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold mb-8 text-center">Contact Me</h1>
-      <form onSubmit={handleSubmit} className="space-y-6 max-w-lg mx-auto">
-        <div>
-          <label htmlFor="email" className="block mb-2">Email Address</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            required
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
-          <ValidationError prefix="Email" field="email" errors={state.errors} />
-        </div>
-
-        <div>
-          <label htmlFor="message" className="block mb-2">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            required
-            rows={6}
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
-          <ValidationError prefix="Message" field="message" errors={state.errors} />
-        </div>
-
+    <div className="max-w-2xl mx-auto py-16 text-center space-y-12">
+      <h1 className="text-5xl font-bold">Get in Touch</h1>
+      <form onSubmit={handleSubmit} className="space-y-8">
+        <input
+          type="email"
+          name="email"
+          placeholder="Your email"
+          required
+          className="w-full px-6 py-4 border border-gray-300 rounded-lg focus:outline-none focus:border-black transition"
+        />
+        <textarea
+          name="message"
+          placeholder="Your message"
+          rows={6}
+          required
+          className="w-full px-6 py-4 border border-gray-300 rounded-lg focus:outline-none focus:border-black transition"
+        />
         <button
           type="submit"
           disabled={state.submitting}
-          className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded"
+          className="bg-black text-white px-8 py-4 rounded-lg font-medium hover:bg-gray-800 transition"
         >
           Send Message
         </button>
       </form>
-    </main>
+    </div>
   );
 }

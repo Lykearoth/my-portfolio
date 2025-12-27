@@ -1,30 +1,36 @@
 import './globals.css';
-import { Inter } from 'next/font/google';
 import Link from 'next/link';
 
-const inter = Inter({ subsets: ['latin'] });
-
 export const metadata = {
-  title: 'Kearoth Ly - Developer Portfolio',
-  description: 'Showcasing my projects and skills',
+  title: 'Kearoth Ly — Developer',
+  description: 'Full-Stack Developer | React, Next.js, Python, AI',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <nav className="bg-gray-800 p-4">
-          <ul className="flex space-x-4 text-white">
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/education">Education</Link></li>
-            <li><Link href="/experience">Experience</Link></li>
-            <li><Link href="/projects">Projects</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
-          </ul>
-        </nav>
-        {children}
-        <footer className="bg-gray-800 p-4 text-white text-center">
-          © 2025 Your Name
+      <body className="min-h-screen flex flex-col">
+        <header className="border-b border-gray-200">
+          <div className="max-w-4xl mx-auto px-6 py-8 flex justify-between items-center">
+            <Link href="/" className="text-2xl font-bold tracking-tight">
+              Kearoth Ly
+            </Link>
+            <nav className="space-x-8 text-sm font-medium">
+              <Link href="#projects" className="text-gray-600 hover:text-black transition">Projects</Link>
+              <Link href="#about" className="text-gray-600 hover:text-black transition">About</Link>
+              <Link href="/contact" className="text-gray-600 hover:text-black transition">Contact</Link>
+            </nav>
+          </div>
+        </header>
+
+        <main className="flex-grow max-w-4xl mx-auto px-6 py-12 w-full">
+          {children}
+        </main>
+
+        <footer className="border-t border-gray-200 py-8 mt-16">
+          <div className="max-w-4xl mx-auto px-6 text-center text-sm text-gray-500">
+            © 2025 Kearoth Ly. Built with Next.js + Tailwind.
+          </div>
         </footer>
       </body>
     </html>
