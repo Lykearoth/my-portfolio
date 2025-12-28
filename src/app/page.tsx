@@ -1,66 +1,93 @@
-import Link from 'next/link';
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+const typingVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+const container = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
 
 export default function Home() {
+  const roles = ["a Developer", "a Designer", "a Photographer", "an AI Enthusiast"];
+
   return (
-    <div className="space-y-32 py-16">
-      {/* Hero Section */}
-      <section className="text-center space-y-8">
-        <h1 className="text-6xl md:text-7xl font-bold tracking-tight">
-          Hi, I’m Kearoth Ly
-        </h1>
-        <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
-          Full-Stack Developer building modern web applications with React, Next.js, Python, and AI.
-        </p>
-        <div className="pt-6">
-          <Link 
-            href="#projects" 
-            className="inline-block bg-black text-white px-8 py-4 rounded-lg font-medium hover:bg-gray-800 transition"
+    <>
+      {/* Full-Width Hero Header */}
+      <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white">
+        <div className="text-center px-6 max-w-4xl">
+          <motion.h1
+            className="text-6xl md:text-8xl font-bold mb-8"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
           >
-            View My Work
+            I'm{" "}
+            <motion.span variants={container} initial="hidden" animate="visible" className="text-blue-600">
+              {roles[0].split("").map((char, i) => (
+                <motion.span key={i} variants={typingVariants}>
+                  {char}
+                </motion.span>
+              ))}
+            </motion.span>
+          </motion.h1>
+
+          {/* Rotating Typing Effect */}
+          <motion.div className="text-2xl md:text-4xl text-gray-700 h-16">
+            {roles.map((role, index) => (
+              <motion.p
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: index === 0 ? 1 : 0, y: index === 0 ? 0 : 20 }}
+                transition={{ duration: 0.8, repeat: Infinity, repeatDelay: 3, delay: index * 4 }}
+                className="absolute"
+              >
+                {role}
+              </motion.p>
+            ))}
+          </motion.div>
+
+          {/* Social Links */}
+          <div className="mt-12 flex justify-center gap-8">
+            <a href="https://www.linkedin.com/in/kearorh-ly" className="text-3xl hover:text-blue-600 transition">
+              LinkedIn
+            </a>
+            <a href="mailto:lykearoth@gmail.com" className="text-3xl hover:text-blue-600 transition">
+              Email
+            </a>
+          </div>
+
+          <Link
+            href="/#projects"
+            className="mt-16 inline-block bg-blue-600 text-white px-10 py-4 rounded-full text-lg font-medium hover:bg-blue-700 transition"
+          >
+            Explore My Work
           </Link>
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="space-y-12">
-        <h2 className="text-4xl font-bold text-center">Selected Projects</h2>
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Project 1 */}
-          <div className="border border-gray-200 rounded-xl p-8 hover:border-gray-400 transition">
-            <h3 className="text-2xl font-semibold mb-3">Smart Face Attendance System</h3>
-            <p className="text-gray-600 mb-6">
-              Real-time facial recognition attendance tracker built with Python, OpenCV, and Flask.
-            </p>
-            <div className="flex gap-4 text-sm font-medium">
-              <Link href="#" className="text-blue-600 hover:underline">Live Demo →</Link>
-              <Link href="#" className="text-gray-600 hover:underline">GitHub →</Link>
-            </div>
-          </div>
+      {/* Other Sections (Projects, About) - Keep consistent minimal style */}
+      <section id="projects" className="py-32 max-w-7xl mx-auto px-6">
+        <h2 className="text-5xl font-bold text-center mb-16">Projects</h2>
+        {/* Add your project cards here - same as previous design */}
+      </section>
 
-          {/* Project 2 - Add more like this */}
-          <div className="border border-gray-200 rounded-xl p-8 hover:border-gray-400 transition">
-            <h3 className="text-2xl font-semibold mb-3">Personal Portfolio (This Site)</h3>
-            <p className="text-gray-600 mb-6">
-              Modern minimal portfolio built with Next.js 14, Tailwind CSS, and deployed on Vercel.
-            </p>
-            <div className="flex gap-4 text-sm font-medium">
-              <Link href="https://github.com/Lykearoth/my-portfolio" className="text-gray-600 hover:underline">Source Code →</Link>
-            </div>
-          </div>
+      <section id="about" className="py-32 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-5xl font-bold mb-12">About Me</h2>
+          <p className="text-xl text-gray-700 leading-relaxed">
+            Welcome! I'm Kearoth Ly, a passionate creative technologist blending development, photography, design, and AI...
+          </p>
         </div>
       </section>
-
-      {/* About Section */}
-      <section id="about" className="space-y-8 max-w-3xl mx-auto text-center">
-        <h2 className="text-4xl font-bold">About</h2>
-        <p className="text-lg text-gray-600 leading-relaxed">
-          Recent IT graduate from Cambodia passionate about creating impactful software. 
-          Experienced in frontend (React/Next.js), backend (Python/Flask, Laravel), and machine learning.
-        </p>
-        <p className="text-lg text-gray-600 leading-relaxed">
-          Currently focused on building clean, performant web applications and exploring AI integration.
-        </p>
-      </section>
-    </div>
+    </>
   );
 }
