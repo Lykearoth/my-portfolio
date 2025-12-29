@@ -1,19 +1,25 @@
-import Link from 'next/link';
+import { motion } from "framer-motion";
 
 export default function Projects() {
   return (
-    <main className="p-8">
-      <h1 className="text-3xl font-bold mb-4">Projects</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="border p-4 rounded">
-          <h2 className="text-2xl">Smart Face Attendance System</h2>
-          <p>Tech: Python, OpenCV, Flask. Automated attendance for education.</p>
-          <p>From 0 to Complete: See step-by-step in README.</p>
-          <Link href="https://github.com/yourusername/face-attendance" className="text-blue-500">GitHub</Link>
-          <Link href="https://your-hosted-demo.vercel.app" className="text-blue-500 ml-2">Live Demo</Link>
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <h1 className="text-4xl font-bold mb-12">Projects</h1>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Repeat this card for each project */}
+        <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 hover:shadow-xl transition">
+          <div className="bg-gray-300 dark:bg-gray-700 h-48 rounded-lg mb-4" /> {/* Placeholder image */}
+          <h3 className="text-2xl font-semibold mb-2">Project Title</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">Short description...</p>
+          <div className="flex gap-4">
+            <a href="#" className="text-blue-600 hover:underline">Live Demo</a>
+            <a href="#" className="text-blue-600 hover:underline">GitHub</a>
+          </div>
         </div>
-        {/* Add more project cards */}
       </div>
-    </main>
+    </motion.section>
   );
 }
